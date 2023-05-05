@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Helper</title>
+</head>
+<body>
+    <p>Patient Name: <input type="text"></p>
+    <p>Patient Sex:
+        <input type="radio" id="male" name="sex" value="male">
+        <label for="male">M</label>
+        <input type="radio" id="female" name="sex" value="female">
+        <label for="female">F</label>
+    </p>
+    <p><label for="old_history">Old history:</label></p>
+    <textarea id="old_history" name="old_history" rows="4" cols="50"></textarea>
+    <p>
+        <label for="desired_history">Desired history:</label>
+        <select name="desired_history" id="desired_history">
+            <option value="admission">Surgery Admission</option>
+            <option value="c&s">Consult & Stay</option>
+            <option value="recheck">Recheck</option>
+            <option value="6mo">6 Month Recheck</option>
+        </select>
+    </p>
+    <input type="submit" value="Submit">
+    <p>
+        <label for="output">Output:</label></p>
+        <textarea id="output" name="output" rows="4" cols="50"></textarea>
+    </p>
+</body>
+</html>
