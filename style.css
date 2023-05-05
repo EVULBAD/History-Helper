@@ -1,0 +1,128 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width:100%;
+    height:100vh;
+}
+
+body {
+    background: rgb(167,157,199);
+    background: linear-gradient(0, rgba(83,134,228,1) 0%, rgba(250,179,169,1) 90%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+flexwrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+formwrapper {
+    width: 40%;
+    border-style:solid;
+    border-width: 20px 20px 1px 1px;
+    border-image-slice: 20 20 1 1;
+    border-image-source: linear-gradient(-45deg, transparent 13px, #0A2342 0 calc(100% - 13px), transparent 0);
+    margin-left: -20px;
+  }
+
+form {
+    background: #F6F7EB;
+    padding: 20px;
+    font-size: 16px;
+}
+
+form img {
+    max-width: 100%;
+    margin: 0 0 20px 0;
+}
+
+form p:first-of-type {
+    margin-top: 0;
+}
+
+form p:last-of-type {
+    margin-bottom: 0;
+}
+
+form, input, select, textarea, button {
+    font-family: 'Poppins', sans-serif;
+}
+
+input, textarea, button {
+    font-size: 12px;
+}
+
+textarea {
+    width: 100%;
+}
+
+.text {
+    resize: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    background: #CACACE;
+    padding:5px 10px;
+    border-radius: 2px;
+}
+
+button.submit {
+    background: #5386E4;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #F6F7EB;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button.submit:hover {
+    background: #0CCE6B;
+    transition: 0.3s;
+}
+
+button.btn {
+    background: #CACACE;;
+    border: none;
+    border-radius: 2px;
+    border: none; 
+    cursor: pointer;
+    margin-top:2px;
+}
+
+select {
+    background: #CACACE;;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 2px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.no_bottom {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
