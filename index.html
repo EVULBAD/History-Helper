@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History Helper</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,28 +13,77 @@
 </head>
 <body>
     <flexwrap>
+	<container>
         <formwrapper>
             <form>
-                <div class="center">
+                <div class="center logo">
                     <img src="logo.gif">
                 </div>
-                <p>Patient Name: <input type="text" class="text"></p>
+                <p>
+		    <label for="name">Patient Name:</label>
+		    <input type="text" class="text" name="name">
+		</p>
                 <p>Patient Sex:
-                    <input type="radio" id="male" name="sex" value="male" checked="checked">
+                    <input type="radio" id="male" name="sex" value="male" checked>
                     <label for="male">M</label>
                     <input type="radio" id="female" name="sex" value="female">
                     <label for="female">F</label>
                 </p>
+                <p>
+	 	    Patient Species:
+                    <input type="radio" id="canine" name="species" value="canine" checked>
+                    <label for="canine">Canine</label>
+                    <input type="radio" id="feline" name="species" value="feline">
+                    <label for="feline">Feline</label>
+                </p>
                 <p class="no_bottom">
-                    <label for="old_history">Old history:</label>
+                    <label for="old_history">Old History:</label>
                     <br>
-                    <textarea id="old_history" name="old_history" rows="2" cols="50" class="text"></textarea>
+                    <textarea id="old_history" name="old_history" rows="3" cols="50" class="text">
+*Reason for Visit*: Concerns about contact between upper canine teeth and lower lip mucosa
+
+*Oral History*: P saw rDVM for examination in February where rDVM noted "base narrow canines" that are contacting the mandibular mucosa. rDVM suggested extraction of the teeth. O would like a specialist opinion - would like to discuss preserving the teeth if possible. O says that she sees sores on the lips at home. They clear up but then come back. P does not seem to exhibit outward signs of pain - he eats well and has normal activity at home.
+
+*Previous oral surgery or cleaning*: None
+
+*Health Problems*:
+Sneezing occasionally for the past few days
+
+*Recent Blood work and Diagnostics*: 9/16/22 - ova & para (neg)
+
+*Medications*: None
+
+*Allergies*: No known allergies
+
+*Rabies*: Up to date until 6/24/24
+
+*FeLV*: Unknown 
+
+*FIV*: Unknown 
+
+*Indoor or outdoor*: Indoor only
+
+*Current diet*: 
+Weruva canned food, 1/2 can twice a day
+Occasionally has salmon or tuna as a topper
+
+*Patient bio*: Tommy is a pet who was acquired from PAWS when he was 5 months old.
+
+*Chews & Treats*: Temptation treats
+
+*Toys*: Feathers on a stick, balls
+
+*Dental care products used at home*: Greenies
+
+*Brushing*: Owner is not brushing teeth.
+
+</textarea>
                 </p>
                 <div class="right">
-                    <button class="btn">Clear</button>
+                    <button class="btn" id="clear_form" type="button">Clear Form</button>
                 </div>
                 <p>
-                    <label for="desired_history">Desired history:</label>
+                    <label for="desired_history">New History Type:</label>
                     <select name="desired_history" id="desired_history">
                         <option value="admission">Surgery Admission</option>
                         <option value="c&s">Recheck Consult & Stay</option>
@@ -42,19 +92,48 @@
                     </select>
                 </p>
                 <div class="center">
-                    <button class="submit">Submit</button>
+                    <button class="submit" id="submit" type="button">Submit</button>
                 </div>
                 <p>
                     <label for="output">Output:</label>
                     <br>
-                    <textarea id="output" name="output" rows="2" cols="50" class="text"></textarea>
+                    <textarea id="output" name="output" rows="3" cols="50" class="text"></textarea>
                     <br>
                 </p>
                 <div class="right">
-                    <button class="btn">Copy to Clipboard</button>
+                    <button class="btn" id="copy_output" type="button">Copy to Clipboard</button>
                 </div>
             </form>
         </formwrapper>
+	<footer>
+	    <div>Made with ♥ by <a href="http://evulbad.com">EVULBAD</a> for AMCS Dentistry</div>
+	    <div id="instructions"><a>Instructions</a></div>
+	</footer>
+	</container>
     </flexwrap>
+    <instructions id="draggable"class="hidden">
+	<header id="draghead">
+	    <text>drag me</text>
+	    <close>✕</close>
+	</header>
+	<textwrap>
+	    <p style="text-align:center">
+		Welcome to History Helper!<br><br>
+	    	If you have a previous patient coming in again for surgery, a consult and stay, or a recheck, this automates filling in the blanks by utilizing a previous history.<br><br>
+	    </p>
+	    <p>
+	    Instructions:<br>
+	    	1. Fill in the History Helper form up until the "Old History" section.<br><br>
+	    	2. Go to your patient in ezyVet and open the "Complete History" tab on the left.<br><br>
+	    	3. Scroll through the "History" section and find their most recent history. Open it and click on the textbox containing the history. Hit Ctrl-A to select all, then Ctrl-C to copy.<br><br>
+	    	4. Return to History Helper. Click on the "Old History" textbox and hit Ctrl-V to paste.<br><br>
+	    	5. Select the type of new history desired, then click "Submit". Output should fill with your new history. Click the "Copy to Clipboard" button to copy.<br><br>
+	    	6. Return to ezyVet. Create a new history and hit Ctrl-V to paste the output into the history textbox.<br><br>
+		7. Hit the "Clear Form" button to start things over for your next patient.<br><br>
+		Great success!
+	    </p>
+	</textwrap>
+    </instructions>
 </body>
 </html>
+<script defer src="main.js"></script>

@@ -1,0 +1,23 @@
+consult -> admission
+health problems
+medications
+allergies
+diet
+dental care products
+brushing
+
+consult -> recheck consult & stay
+previous oral surgery
+health problems
+medications
+allergies
+diet
+type of training/where received/when received
+chews/treats
+toys
+dental care products
+brushing
+
+consult -> recheck
+
+consult -> 6mo recheck
