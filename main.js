@@ -108,29 +108,7 @@ function searchOldHistory() {
     return result;
 }
 
-function nullSwapper(desiredInfo, infoType) {
-    let placeholderInfo;
-    if (desiredInfo == null) {
-        placeholderInfo = "def" + infoType;
-    } else {
-        placeholderInfo = "#INPUT#"
-    }
-    return placeholderInfo;
-}
-
-function findInArray(value, array) {
-    let result;
-    for (i = 0; i < array.length; i++) {
-        if (value == array[i]) {
-            result = true;
-            break;
-        } else {
-            result = false;
-        }
-    }
-    return result;
-}
-
+//checks which radios are checked.
 function isChecked(radioName) {
     let list = document.getElementsByName(radioName),
         value;
@@ -142,6 +120,7 @@ function isChecked(radioName) {
     return value;
 }
 
+//generates pronouns from whichever sex is checked.
 function pronounCheck(sexValue) {
     let pronoun = "";
     if (sexValue == "male") {
@@ -184,18 +163,37 @@ function writeHistory() {
         defFeLV = "*FeLV*: #INPUT#['Is this cat'/positive/negative/not tested/unknown]",
         defFIV = "*FIV*: #INPUT#['Is this cat'/positive/negative/not tested/unknown]",
         defInOut = "*Indoor or outdoor*: #INPUT#['Is this cat'/Indoor/Outdoor]",
-        defaults = ["defPatientBio", "defAllergies", "defRabies", "defBrushing", "defFeLV", "defFIV", "defInOut"]
+        defaultsStrings = ["defPatientBio", "defAllergies", "defRabies", "defBrushing", "defFeLV", "defFIV", "defInOut"],
+        defaults = [defPatientBio, defAllergies, defRabies, defBrushing, defFeLV, defFIV, defInOut]
         basic = [];
 
-    console.log(patient);
+    let brushingString = patient.brushing,
+        dietString = patient.diet,
+        inOutString;
+    if (patient.inOut != null) {
+        inOutString = patient.inOut;
+    } else {
+        inOutString = "Not applicable."
+    };
+    patient.brushing = brushingString.substring(0, brushingString.indexOf("\n"));
+    if (dietString.indexOf(patient.name) != -1) {
+        dietString = patient.diet;
+        patient.diet = dietString.substring(0, dietString.indexOf(patient.name) - 2);
+    }
+    if (inOutString.indexOf("\n") != -1) {
+        inOutString = patient.inOut;
+        patient.inOut = inOutString.substring(0, inOutString.indexOf("\n") - 1);
+    }
 
     for (const key in patient) {
         let firstLetter = key.charAt(0).toUpperCase(),
             remainingLetters = key.substring(1),
-            currentKey = firstLetter + remainingLetters;
-        if (patient[key] == null && findInArray("def" + currentKey, defaults) == true) {
-            patient[key] = "def" + currentKey;
-        } else if (patient[key] == null && findInArray("def" + currentKey, defaults) == false) {
+            currentKey = firstLetter + remainingLetters,
+            defaultIndex = defaultsStrings.indexOf("def" + currentKey);
+        console.log(key + ": " + patient[key]);
+        if (patient[key] == null && defaultIndex > -1) {
+            patient[key] = " " + defaults[defaultIndex];
+        } else if (patient[key] == null && defaultIndex == -1) {
             patient[key] = "#INPUT#";
         }
     }
@@ -207,40 +205,17 @@ function writeHistory() {
         if (isChecked("species") == "canine") {
             document.getElementsByName("output")[0].value = basic[0] + basic[1]
         } else {
-            document.getElementsByName("output")[0].value = basic[0] + "\n\n*FeLV*:" + patient.felv + "\n\n*FIV*:" + patient.fiv + "\n\n*Indoor or outdoor*:" + patient.inOut + basic[1]
+            document.getElementsByName("output")[0].value = basic[0] + "\n\n*FeLV*:" + patient.FeLV + "\n\n*FIV*:" + patient.FIV + "\n\n*Indoor or outdoor*:" + patient.inOut + basic[1]
         }
     } else if (historyType == "recheck") {
         document.getElementsByName("output")[0].value = "*" + patient.name + " was last seen on*:  #INPUT#\n*Procedure performed*: #INPUT#\n\n*How has " + patient.name + " been doing since the last appointment?* #INPUT#\n\n#INPUT#['Any new concerns or medical issues?'/Owner is concerned about #INPUT#/There are no concerns at this time.]\n\n*Health problems*:" + patient.healthProblems + "\n\n*Medications*: " + patient.medications + "\n\n*Diet*:" + patient.diet + "\n\n*Brushing*:" + patient.brushing
     } else if (historyType == "6mo") {
-        document.getElementsByName("output")[0].value = "*Reason for visit*: #INPUT#\n\n*" + patient.name + " was last seen on*:  #INPUT#\n*Procedure performed*: #INPUT#\n\n*Oral history*: #INPUT#\n\n*Health problems*:" + patient.healthProblems + "\n\n*Recent bloodwork and diagnostics*: #INPUT#\n\n*Medications*:" + patient.medications + "\n\n*Allergies*:" + patient.allergies + "\n\n*Rabies*:" + patient.rabies + "\n\n#INPUT#['If patient is a cat:'/*FeLV*: #INPUT#['Is this cat'/positive/negative/not tested/unknown]/'Not a cat']\n\n#INPUT#['If patient is a cat:'/*FIV*: #INPUT#['Is this cat'/positive/negative/not tested/unknown]/'Not a cat']\n\n#INPUT#['If patient is a cat:'/*Indoor or outdoor*: ['Is this cat'/Indoor/Outdoor]/'Not a cat']\n\n*Diet*:" + patient.diet + "\n\n*Dental care products used at home*:" + patient.dentalProducts + "\n\n*Brushing*:" + patient.brushing
+        basic = [document.getElementsByName("output")[0].value = "*Reason for visit*: #INPUT#\n\n*" + patient.name + " was last seen on*:  #INPUT#\n*Procedure performed*: #INPUT#\n\n*Oral history*: #INPUT#\n\n*Health problems*:" + patient.healthProblems + "\n\n*Recent bloodwork and diagnostics*: #INPUT#\n\n*Medications*:" + patient.medications + "\n\n*Allergies*:" + patient.allergies + "\n\n*Rabies*:" + patient.rabies, "\n\n*Diet*:" + patient.diet + "\n\n*Dental care products used at home*:" + patient.dentalProducts + "\n\n*Brushing*:" + patient.brushing
+        ]
+        if (isChecked("species") == "canine") {
+            document.getElementsByName("output")[0].value = basic[0] + basic[1]
+        } else {
+            document.getElementsByName("output")[0].value = basic[0] + "\n\n*FeLV*:" + patient.FeLV + "\n\n*FIV*:" + patient.FIV + "\n\n*Indoor or outdoor*:" + patient.inOut + basic[1]
+        }
     }
 }
-
-/*
-INFO TO TRANSFER
-consult & stay:
-Health problems
-patient.medications
-patient.allergies
-patient.rabies
-FeLV (cat)
-FIV (cat)
-Indoor or outdoor (cat)
-patient.diet
-Patient bio
-Chews & patient.treats
-patient.toys
-Dental care products used at home
-patient.brushing
-
-6mo recheck:
-Health problems
-patient.medications
-patient.allergies
-FeLV (cat)
-FIV (cat)
-Indoor or outdoor (cat)
-patient.diet
-Dental care products used at home
-patient.brushing
-*/
