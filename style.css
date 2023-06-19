@@ -27,6 +27,27 @@ body, select, button, textarea, input {
 font-family: 'Poppins', sans-serif;
 }
 
+teeth img {
+    position:absolute;
+    z-index:0;
+    height: 80%;
+    bottom: -70px;
+    opacity: 50%;
+    pointer-events: none;
+}
+
+teeth img:first-of-type {
+    left: 10px;
+    rotate:-3deg;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+teeth img:nth-of-type(2) {
+    right: 10px;
+    rotate:3deg;
+}
+
 p {
     margin:0;
 }
@@ -41,6 +62,7 @@ label {
 }
 
 container {
+    z-index:1;
     display: flex;
     width: 40%;
     justify-content:center;
@@ -232,6 +254,11 @@ footer {
     display: flex;
     justify-content: space-between;
     width: calc(100% - 20px);
+    color: #F6F7EB;
+}
+
+footer a {
+    color: #F6F7EB
 }
 
 #instructions {
