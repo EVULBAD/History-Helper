@@ -51,6 +51,7 @@
                         <option value="c&s">Recheck Consult & Stay</option>
                         <option value="recheck">Recheck</option>
                         <option value="6mo">6-Month Recheck</option>
+                        <option value="echo">Echo</option>
                     </select>
                 </p>
                 <div class="center">
@@ -81,7 +82,7 @@
 	<textwrap>
 	    <p style="text-align:center">
 		Welcome to History Helper!<br><br>
-	    	If you have a previous patient coming in again for surgery, a consult and stay, or a recheck, this automates filling in the blanks by utilizing a previous history.<br><br>
+	    	If you have a previous patient coming in again for surgery, a consult and stay, a recheck, or an echo, this automates filling in the blanks by utilizing a previous history.<br><br>
 	    </p>
 	    <p>
 	    Instructions:<br>
@@ -91,13 +92,19 @@
 	    	4. Return to History Helper. Click on the "Old History" textbox and hit Ctrl-V to paste.<br><br>
 	    	5. Select the type of new history desired, then click "Submit". Output should fill with your new history. Click the "Copy to Clipboard" button to copy.<br><br>
 	    	6. Return to ezyVet. Create a new history and hit Ctrl-V to paste the output into the history textbox.<br><br>
-		7. Hit the "Clear Form" button to start things over for your next patient.<br><br>
-		8. Great success!
-        <br><br>
+            7. Double check your new history for any issues, as there are certain things that History Helper cannot remove; for example, "last given" times/dates for medications will persist and need to be manually deleted to avoid confusion. The semi-unpredictable nature of histories mean they don't always look how History Helper expects, so having a set of human eyes ensure everything looks acceptable is very important.<br><br>
+            8. Click the "update" button on ezyVet to save the new history.<br><br>
+		    9. In History Helper, hit the "Clear Form" button to start things over for your next patient.<br><br>
+        </p>
+        <p style="text-align:center">Great success!<br>
         If you notice any errors or bugs... <a href="mailto:dmitrydohy@gmail.com">you know who to call</a>.
 	    </p>
 	</textwrap>
     </instructions>
+    <teeth>
+	<img src="teeth.png"></img>
+	<img src="teeth.png"></img>
+    </teeth>
 </body>
 </html>
 <script defer src="main.js"></script>
