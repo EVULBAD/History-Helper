@@ -86,8 +86,8 @@ function copyOutput() {
     navigator.clipboard.writeText(copyText.value);
 }
 
-//HISTORY MAKING
-//takes arguments and parses the last argument as "oldHistory", with the rest as "searchTerms". if a search term is not in "oldHistory", returns null.
+//HISTORY WRITING
+//takes arguments, parsing the last argument as "oldHistory" with the rest as "searchTerms". if a search term is not in "oldHistory", returns null.
 function searchOldHistory() {
     let args = Array.from(arguments),
         oldHistory = args.pop(),
@@ -131,6 +131,19 @@ function pronounCheck(sexValue) {
     return pronoun;
 }
 
+//figures out whether patient will require feline-specific values or not.
+function speciesValues(array, patient) {
+	let species = isChecked("species"),
+	    output;
+	if (species == "canine") {
+	    output = array[0] + array[1]
+        } else {
+            output = array[0] + "\n\n*FeLV*:" + patient.FeLV + "\n\n*FIV*:" + patient.FIV + "\n\n*Indoor or outdoor*:" + patient.inOut + basic[1]
+        }
+	return output;
+}
+
+//puts everything together and outputs new history.
 function writeHistory() {
     //gathering values.
     let oldHistory = document.getElementsByName("old_history")[0].value,
@@ -217,22 +230,13 @@ function writeHistory() {
         document.getElementsByName("output")[0].value = "*Time patient last ate*: #INPUT#\n\n*Health problems*:" + patient.healthProblems + "\n\n#INPUT#['Any changes to health, appetite or behavior?'/No changes to health, appetite or behavior/Changes since last appointment: #INPUT#]\n\n*Medications*:" + patient.medications + "\n\n*Allergies*:" + patient.allergies + "\n\n*Diet*:" + patient.diet + "\n\n*Dental care products used at home*:" + patient.dentalProducts + "\n\n*Brushing*:" + patient.brushing + "\n\n#INPUT#['Is the owner still giving bad list treats?'/Owner is still giving toys or treats that are not recommended. Reminded owner items can damage teeth./Owner has discarded all toys and treats that can damage teeth./'Was not giving any bad items to begin with']\n\n#INPUT#['Does client want a toenail trim while patient is under anesthesia?'/Perform a toenail trim./Do NOT perform a toenail trim.]\n\n#INPUT#['Go over treatment plan with owner'/Went over treatment plan with owner./Owner did not consent to treatment plan.]\n\n#INPUT#['Does owner consent to us performing agreed-upon treatment(s) without prior phone call?'/Owner consents to us performing agreed-upon treatment(s) without prior phone call./Owner would like phone call prior to *all* treatment(s), even if previously discussed at consultation.]\n\n#INPUT#['Does owner consent to us performing treatment(s) deemed necessary mid-procedure, even if said treatment(s) may exceed estimate, without prior phone call?'/Owner consents to us performing additional treatment(s) deemed necessary mid-procedure, even if said treatment(s) may exceed estimate, without prior phone call./Owner would like phone call prior to performing additional treatment(s) deemed necessary mid-procedure.]\n\n#INPUT#['Go over anesthetic consent form.'/Owner consents to anesthetic procedure and signed anesthesia consent form./Owner does not consent to anesthesia and did not sign form.]\n\n#INPUT#['Go over CPR status.'/Owner consents to use of CPR should patient arrest./Owner **does not** consent to CPR; if patient arrests, do not resuscitate.]\n\n*Primary contact name and number for today*: #INPUT#";
     } else if (historyType == "c&s") {
         basic = ["*Reason for visit*: #INPUT#\n\n*Time patient last ate*: #INPUT#\n\n*Oral history*: #INPUT#\n\n*Previous oral surgery or cleaning*:" + patient.prevDental + "\n\n*Health problems*:" + patient.healthProblems + "\n\n*Recent bloodwork and diagnostics*: #INPUT#\n\n*Medications*:" + patient.medications + "\n#INPUT#['Did you ask the owner if the above medications are accurate and currently being administered?'/Verified the above medication, dosage and frequency with owner. They are accurate and currently being administered./'No is not an option. Go back and verify with owner to ensure patient safety.']\n\n*Allergies*:" + patient.allergies + "\n\n*Rabies*:" + patient.rabies, "\n\n*Diet*:" + patient.diet + "\n\n*Patient bio*:" + patient.patientBio + "\n\n*Chews & treats*: " + patient.treats + "\n\n*Toys*:" + patient.toys + "\n\n#INPUT#['Did you review the Good-Bad List with client?'/Reviewed list of items that may break teeth./'No']\n\n*Dental care products used at home*:" + patient.dentalProducts + "\n\n*Brushing*: " + patient.brushing + "\n\n#INPUT#['Does client want a toenail trim while patient is under anesthesia?'/Perform a toenail trim./Do NOT perform a toenail trim.]\n\n#INPUT#['Go over treatment plan with owner'/Went over treatment plan with owner./Owner did not consent to treatment plan.]\n\n#INPUT#['Does owner consent to us performing agreed-upon treatment(s) without prior phone call?'/Owner consents to us performing agreed-upon treatment(s) without prior phone call./Owner would like phone call prior to *all* treatment(s), even if previously discussed at consultation.]\n\n#INPUT#['Does owner consent to us performing treatment(s) deemed necessary mid-procedure, even if said treatment(s) may exceed estimate, without prior phone call?'/Owner consents to us performing additional treatment(s) deemed necessary mid-procedure, even if said treatment(s) may exceed estimate, without prior phone call./Owner would like phone call prior to performing additional treatment(s) deemed necessary mid-procedure.]\n\n#INPUT#['Go over anesthetic consent form.'/Owner consents to anesthetic procedure and signed anesthesia consent form./Owner does not consent to anesthesia and did not sign form.]\n\n#INPUT#['Go over CPR status.'/Owner consents to use of CPR should patient arrest./Owner **does not** consent to CPR; if patient arrests, do not resuscitate.]\n\n*Primary contact name and number for today*: #INPUT#"];
-        if (isChecked("species") == "canine") {
-            document.getElementsByName("output")[0].value = basic[0] + basic[1]
-        } else {
-            document.getElementsByName("output")[0].value = basic[0] + "\n\n*FeLV*:" + patient.FeLV + "\n\n*FIV*:" + patient.FIV + "\n\n*Indoor or outdoor*:" + patient.inOut + basic[1]
-        }
+        document.getElementsByName("output")[0].value = speciesValues(basic, patient);
     } else if (historyType == "recheck") {
         document.getElementsByName("output")[0].value = "*" + patient.name + " was last seen on*:  #INPUT#\n*Procedure performed*: #INPUT#\n\n*How has " + patient.name + " been doing since the last appointment?* #INPUT#\n\n#INPUT#['Any new concerns or medical issues?'/Owner is concerned about #INPUT#/There are no concerns at this time.]\n\n*Health problems*:" + patient.healthProblems + "\n\n*Medications*:" + patient.medications + "\n\n*Diet*:" + patient.diet + "\n\n*Brushing*:" + patient.brushing
     } else if (historyType == "6mo") {
-        basic = [document.getElementsByName("output")[0].value = "*Reason for visit*: #INPUT#\n\n*" + patient.name + " was last seen on*:  #INPUT#\n*Procedure performed*: #INPUT#\n\n*Oral history*: #INPUT#\n\n*Health problems*:" + patient.healthProblems + "\n\n*Recent bloodwork and diagnostics*: #INPUT#\n\n*Medications*:" + patient.medications + "\n\n*Allergies*:" + patient.allergies + "\n\n*Rabies*:" + patient.rabies, "\n\n*Diet*:" + patient.diet + "\n\n*Dental care products used at home*:" + patient.dentalProducts + "\n\n*Brushing*:" + patient.brushing
-        ]
-        if (isChecked("species") == "canine") {
-            document.getElementsByName("output")[0].value = basic[0] + basic[1]
-        } else {
-            document.getElementsByName("output")[0].value = basic[0] + "\n\n*FeLV*:" + patient.FeLV + "\n\n*FIV*:" + patient.FIV + "\n\n*Indoor or outdoor*:" + patient.inOut + basic[1]
-        }
+        basic = [document.getElementsByName("output")[0].value = "*Reason for visit*: #INPUT#\n\n*" + patient.name + " was last seen on*:  #INPUT#\n*Procedure performed*: #INPUT#\n\n*Oral history*: #INPUT#\n\n*Health problems*:" + patient.healthProblems + "\n\n*Recent bloodwork and diagnostics*: #INPUT#\n\n*Medications*:" + patient.medications + "\n\n*Allergies*:" + patient.allergies + "\n\n*Rabies*:" + patient.rabies, "\n\n*Diet*:" + patient.diet + "\n\n*Dental care products used at home*:" + patient.dentalProducts + "\n\n*Brushing*:" + patient.brushing];
+        document.getElementsByName("output")[0].value = speciesValues(basic, patient);
     } else if (historyType == "echo") {
-        document.getElementsByName("output")[0].value = "*Time patient last ate*: #INPUT#\n\n*Diet*:" + patient.diet + "*\n\nHealth problems*:" + patient.healthProblems + "\n\nMedications:" + patient.medications + "\n\n#INPUT#['Go over use of oral sedation.'/Owner consents to use of oral sedation if necessary./Owner **does not** consent to use of oral sedation; do not administer.]\n\n#INPUT#['Go over CPR status.'/Owner consents to use of CPR should patient arrest./Owner **does not** consent to CPR; if patient arrests, do not resuscitate.]\n\n*Primary contact for today*: #INPUT#"; 
+        document.getElementsByName("output")[0].value = "*Time patient last ate*: #INPUT#\n\n*Diet*:" + patient.diet + "\n\n*Health problems*:" + patient.healthProblems + "\n\n*Medications*:" + patient.medications + "\n\n#INPUT#['Go over use of oral sedation.'/Owner consents to use of oral sedation if necessary./Owner **does not** consent to use of oral sedation; do not administer.]\n\n#INPUT#['Go over CPR status.'/Owner consents to use of CPR should patient arrest./Owner **does not** consent to CPR; if patient arrests, do not resuscitate.]\n\n*Primary contact for today*: #INPUT#"; 
     }
 }

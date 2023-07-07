@@ -30,23 +30,61 @@ font-family: 'Poppins', sans-serif;
 teeth img {
     position:absolute;
     z-index:0;
+}
+
+teeth#hori img {
     height: 80%;
-    max-width:45%;
+    max-width:47%;
     bottom: -70px;
     opacity: 50%;
     pointer-events: none;
 }
 
-teeth img:first-of-type {
-    left: 10px;
+teeth#hori img:first-of-type {
+    left: -30px;
     rotate:-3deg;
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
 }
 
-teeth img:nth-of-type(2) {
-    right: 10px;
-    rotate:3deg;
+teeth#hori img:nth-of-type(2) {
+    right: -30px;
+    rotate: 3deg;
+}
+
+teeth#vert img {
+    max-width: 95%;
+    max-height: 65%;
+    opacity: 50%;
+    pointer-events: none;
+}
+
+teeth#vert img:first-of-type {
+    left: 0;
+    top: -100px;
+    rotate:90deg;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+teeth#vert img:nth-of-type(2) {
+    right: 0;
+    bottom: -100px;
+    rotate:-90deg;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+@media only screen and (min-width:1101px) {
+    #vert {
+        display: none;
+    }
+}
+
+@media only screen and (max-width:1100px) {
+    #hori {
+        display: none;
+    }
 }
 
 p {
