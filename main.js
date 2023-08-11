@@ -150,26 +150,26 @@ function speciesValues(array, patient) {
 //puts everything together and outputs new history.
 function writeHistory() {
     //gathering values.
-    let oldHistory = document.getElementsByName("old_history")[0].value,
+    let oldHistory = document.getElementsByName("old_history")[0].value.replace(/\*/g, ''),
         historyType = document.getElementsByName("desired_history")[0].value,
         patient = {
             name: document.getElementsByName("name")[0].value,
             sex: isChecked("sex"),
             species: isChecked("species"),
-            prevDental: searchOldHistory("*Previous oral surgery or cleaning*:", oldHistory),
-            healthProblems: searchOldHistory("*Health problems*:", "*Current health problems or other concerns*:", "*Pertinent Medical History*:", oldHistory),
-            medications: searchOldHistory("*Medications*:", oldHistory),
-            allergies: searchOldHistory("*Allergies*:", oldHistory),
-            rabies: searchOldHistory("*Rabies*:", oldHistory),
-            FeLV: searchOldHistory("*FeLV*:", oldHistory),
-            FIV: searchOldHistory("*FIV*:", oldHistory),
-            inOut: searchOldHistory("*Indoor or outdoor*:", oldHistory),
-            diet: searchOldHistory("Diet*:", "*Current diet*:", oldHistory),
-            patientBio: searchOldHistory("*Patient bio*:", oldHistory),
-            treats: searchOldHistory("*Chews & treats*:", oldHistory),
-            toys: searchOldHistory("*Toys*:", oldHistory),
-            dentalProducts: searchOldHistory("*Dental care products used at home*:", oldHistory),
-            brushing: searchOldHistory("*Brushing*:", oldHistory)
+            prevDental: searchOldHistory("Previous oral surgery or cleaning:", oldHistory),
+            healthProblems: searchOldHistory("Health problems:", "Current health problems or other concerns:", "Pertinent Medical History:", oldHistory),
+            medications: searchOldHistory("Medications:", oldHistory),
+            allergies: searchOldHistory("Allergies:", oldHistory),
+            rabies: searchOldHistory("Rabies:", oldHistory),
+            FeLV: searchOldHistory("FeLV:", oldHistory),
+            FIV: searchOldHistory("FIV:", oldHistory),
+            inOut: searchOldHistory("Indoor or outdoor:", oldHistory),
+            diet: searchOldHistory("Diet:", "Current diet:", oldHistory),
+            patientBio: searchOldHistory("Patient bio:", oldHistory),
+            treats: searchOldHistory("Chews & treats:", oldHistory),
+            toys: searchOldHistory("Toys:", oldHistory),
+            dentalProducts: searchOldHistory("Dental care products used at home:", oldHistory),
+            brushing: searchOldHistory("Brushing:", oldHistory)
         },
         petPronoun = pronounCheck(patient.sex),
         //declaring default values for when said values are null.
