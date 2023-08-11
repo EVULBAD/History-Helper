@@ -100,8 +100,7 @@ function searchOldHistory() {
         if (lowerCase.indexOf(searchTerm) == -1) {
             result = null;
         } else {
-            result = result.split("*")[0];
-            result = result.substring(0, result.length);
+            result = result.substring(0, result.indexOf("\n\n") + 1);
             break;
         }
     }
@@ -189,8 +188,8 @@ function writeHistory() {
     let brushingString = patient.brushing;
     if (brushingString == null) {
         patient.brushing = defBrushing;
-    } else if (brushingString.lastIndexOf("\n\n") != -1){
-        patient.brushing = brushingString.substring(0, brushingString.lastIndexOf("\n\n"));
+    } else if (brushingString.indexOf("\n\n") != -1){
+        patient.brushing = brushingString.substring(0, brushingString.indexOf("\n\n"));
     }
 
     //go through each key in patient and figure out which ones are null and need to be replaced with default values.
