@@ -9,4 +9,4 @@ Instructions for use are availabe on History Helper's webpage.
 - **User-Friendly Interface.** Built with a simple and intuitive design to allow easy input and output of data.
 
 # Known Issues
-- Not mobile-responsive. Employees at Animal Medical Center of Seattle are expected to only use History Helper on the computers provided to them on the premises, so mobile compatability is not especially low priority.
+- Not mobile-responsive. Employees at Animal Medical Center of Seattle are expected to only use History Helper on the computers provided to them on the premises, so mobile compatability is low priority.
