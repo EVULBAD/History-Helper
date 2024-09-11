@@ -1,7 +1,5 @@
-![History Helper](https://evulbad.com/history-helper/logo.gif)
-
 # Overview
-History Helper is a tool designed to assist with generating new patient histories based on old records. It takes existing historical data for returning patients and creates fresh, customized histories for use in medical, administrative, or other settings. This tool helps streamline the process of updating patient records while maintaining a personalized touch.
+History Helper is a tool designed to assist with generating patient histories based on old records. It takes existing historical data for returning patients and creates fresh, customized histories for use in medical, administrative, or other settings. This tool helps streamline the process of updating patient records while maintaining a personalized touch.
 
 # Features
 - **Data-Driven History Generation.** Utilizes old patient histories to create new, relevant entries for returning patients.
